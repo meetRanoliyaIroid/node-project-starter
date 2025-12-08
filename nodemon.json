@@ -1,0 +1,5 @@
+{
+  "watch": ["**/*.js", "*.yaml", "*.yml", ".env"],
+  "ext": "js,html,yaml,yml",
+  "exec": "npm run babel-node"
+}

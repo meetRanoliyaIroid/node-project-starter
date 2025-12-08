@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+    <title>OTP Verification</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700"
+        rel="stylesheet" media="screen">
+    <style>
+        .hover-underline:hover {
+            text-decoration: underline !important;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes ping {
+
+            75%,
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse {
+            50% {
+                opacity: .5;
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(-25%);
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+
+            50% {
+                transform: none;
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sm-px-24 {
+                padding-left: 24px !important;
+                padding-right: 24px !important;
+            }
+
+            .sm-py-32 {
+                padding-top: 32px !important;
+                padding-bottom: 32px !important;
+            }
+
+            .sm-w-full {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+
+<body
+    style="margin: 0; padding: 0; width: 100%; word-break: break-word; -webkit-font-smoothing: antialiased; --bg-opacity: 1; background-color: #eceff1;">
+    <div style="display: none;"> </div>
+    <div role="article" aria-roledescription="email" aria-label="Verify your email" lang="en">
+        <table style="font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif; width: 100%;" width="100%"
+            cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+                <td align="center"
+                    style="--bg-opacity: 1; background-color: #eceff1; font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif;">
+                    <table class="sm-w-full"
+                        style="font-family: 'Montserrat',Arial,sans-serif; width: 600px; margin-top:25px; margin-bottom:25px"
+                        width="600" cellpadding="0" cellspacing="0" role="presentation">
+                        <tr>
+                            <td class="sm-py-32 sm-px-24"
+                                style="mso-line-height-rule: exactly; padding: 35px 48px 25px 48px; text-align: center; font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif; background-color: #020202;">
+                                <span style="margin:0 auto;">
+                                    <img width="120" height="auto" src="<%= logo %>"
+                                        alt="" style="margin-right:4px;">
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="sm-px-24"
+                                style="--bg-opacity: 1; background-color: #ffffff; border-radius: 4px; font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; line-height: 24px; padding: 48px; text-align: left; --text-opacity: 1; color: #626262;"
+                                margin-bottom="10px" bgcolor="rgba(255, 255, 255, var(--bg-opacity))" align="left">
+                                <p style="font-size: 16px; color: #666; line-height: 1.5;">Dear User,</p>
+                                <p style="font-size: 16px; color: #666; line-height: 1.5;">Thank you for choosing App Name! 🌟</p>
+                                <p style="font-size: 16px; color: #666; line-height: 1.5;">To complete your account registration, please use the following One-Time Password (OTP):</p>
+                                <p style="font-size: 18px; color: #000; font-weight: bold;">OTP: <%= otp %></p>
+                                <p style="font-size: 16px; color: #666; line-height: 1.5;">This OTP is valid for single use and will expire shortly. For your security, please do not share this code with anyone.</p>
+                                <p style="font-size: 16px; color: #666; line-height: 1.5;">If you have any concerns about your account security, our support team is here to help. Contact us anytime at <a href="mailto:support@stackt.com">support@appname.com</a>.</p>
+                                <p style="font-size: 16px; color: #666; line-height: 1.5;">Thank you for being part of the App Name community. We're thrilled to have you on board!</p>
+                                <p style="font-size: 16px; color: #666; line-height: 1.5;">Sincerely,<br>The App Name Team</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

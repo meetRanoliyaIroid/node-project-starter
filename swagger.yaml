@@ -1,0 +1,339 @@
+openapi: 3.0.0
+
+info:
+  title: Project Starter
+  description: OpenAPI specification for Project Starter
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:4001
+    description: Local server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths:
+  /login:
+    post:
+      summary: Login
+      description: Login to the app
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone_number:
+                  type: string
+                  description: The phone number of the user
+                  example: "+919876543210"
+                password:
+                  type: string
+                  description: The password of the user
+                  example: 12345678
+      responses:
+        "200":
+          description: Login successful
+        "401":
+          description: Unauthorized
+        "422":
+          description: Validation error
+  
+  /register:
+    post:
+      summary: Register
+      description: Register a new user
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: The first name of the user
+                  example: John
+                last_name:
+                  type: string
+                  description: The last name of the user
+                  example: Doe
+                phone_number:
+                  type: string
+                  description: The phone number of the user
+                  example: "+919876543210"
+                password:
+                  type: string
+                  description: The password of the user
+                  example: 12345678
+                confirm_password:
+                  type: string
+                  description: The confirm password of the user
+                  example: 12345678
+      responses:
+        "200":
+          description: Register successful
+        "401":
+          description: Unauthorized
+        "422":
+          description: Validation error
+  
+  /send-otp:
+    post:
+      summary: Send OTP
+      description: Send OTP to the user
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                is_forgot_password_flow:
+                  type: boolean
+                  description: If true, the OTP is for forgot password flow
+                  example: false
+                phone_number:
+                  type: string
+                  description: The phone number of the user
+                  example: "+919876543210"
+      responses:
+        "200":
+          description: OTP sent successfully
+        "401":
+          description: Unauthorized
+        "422":
+          description: Validation error
+  
+  /verify-otp:
+    post:
+      summary: Verify OTP
+      description: Verify OTP
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                is_forgot_password_flow:
+                  type: boolean
+                  description: If true, the OTP is for forgot password flow
+                  example: false
+                phone_number:
+                  type: string
+                  description: The phone number of the user
+                  example: "+919876543210"
+                otp:
+                  type: string
+                  description: The OTP of the user
+                  example: 1111
+      responses:
+        "200":
+          description: OTP verified successfully
+        "401":
+          description: Unauthorized
+        "422":
+          description: Validation error
+  
+  /reset-password:
+    post:
+      summary: Reset Password
+      description: Reset Password
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone_number:
+                  type: string
+                  description: The phone number of the user
+                  example: "+919876543210"
+                password:
+                  type: string
+                  description: The password of the user
+                  example: 12345678
+                confirm_password:
+                  type: string
+                  description: The confirm password of the user
+                  example: 12345678
+      responses:
+        "200":
+          description: OTP verified successfully
+        "401":
+          description: Unauthorized
+        "422":
+          description: Validation error
+  
+  /logout:
+    post:
+      summary: Logout
+      description: Logout the user
+      tags:
+        - Auth
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  description: The device id of the user
+                  example: 1234567890
+      responses:
+        "200":
+          description: Logout successful
+        "401":
+          description: Unauthorized
+        "422":
+          description: Validation error
+  
+  /user/profile:
+    get:
+      summary: Get user profile
+      description: |
+        - Get the user profile (If id is not provided, then it will return the auth user profile)
+      tags:
+        - User
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: query
+          required: false
+          type: integer
+          description: The id of the user
+          example: 1
+        - name: timezone
+          in: query
+          required: false
+          type: string
+          description: The timezone of the user
+          example: Asia/Kolkata
+      responses:
+        "200":
+          description: User profile fetched successfully
+        "401":
+          description: Unauthorized
+        "422":
+          description: Validation error
+  
+  /user/info-update:
+    post:
+      summary: Update user info
+      description: '**gender: 1 => male, 2 => female, 3 => non-binary, 4 => prefer not to say**'
+      tags:
+        - User
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: The first name of the user
+                  example: John
+                last_name:
+                  type: string
+                  description: The last name of the user
+                  example: Doe
+                profile:
+                  type: string
+                  format: binary
+                  description: The profile of the user
+                gender:
+                  type: string
+                  description: The gender of the user
+                  example: 1
+                dob:
+                  type: string
+                  format: date
+                  description: The date of birth of the user
+                  example: '2001-01-01'
+                is_attempt_terms_and_conditions:
+                  type: boolean
+                  description: If true, the user has attempted the terms and conditions
+                  example: true
+      responses:
+        "200":
+          description: User info updated successfully
+        "401":
+          description: Unauthorized
+        "422":
+          description: Validation error
+  
+  /user/change-password:
+    post:
+      summary: Change password
+      description: Change the user password
+      tags:
+        - User
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                old_password:
+                  type: string
+                  description: The old password of the user
+                  example: 1234567890
+                password:
+                  type: string
+                  description: The new password of the user
+                  example: 12345678
+                confirm_password:
+                  type: string
+                  description: The confirm password of the user
+                  example: 12345678
+      responses:
+        "200":
+          description: Password changed successfully
+        "401":
+          description: Unauthorized
+        "422":
+          description: Validation error
+  
+  /user/delete-account:
+    delete:
+      summary: Delete account
+      description: Delete the user account
+      tags:
+        - User
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Account deleted successfully
+        "401":
+          description: Unauthorized
+        "422":
+          description: Validation error
